@@ -1,1 +1,2 @@
-Status: INCIDENT in progress.
+Status: INCIDENT in progress. Status: under investigation.
+
