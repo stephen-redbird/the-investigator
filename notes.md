@@ -1,1 +1,1 @@
-Status: INCIDENT in progress.
+Status: all quiet.
