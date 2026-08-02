@@ -10,7 +10,7 @@ An AI-powered security analyst that helps investigate cyber incidents by correla
 
 ## Screenshot
 
-
+docs/README_Screenshot.png
 
 ---
 
