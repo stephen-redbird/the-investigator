@@ -1,0 +1,5 @@
+2026-05-02 01:14:05 ALERT Brute force attempt detected src=185.220.101.47 user=admin failures=2
+2026-05-02 01:14:31 ALERT Successful auth after multiple failures src=185.220.101.47 user=admin
+2026-05-02 01:22:03 ALERT Suspicious file create on share host=FILESERVER path=\\fileserver\share\invoice.docx
+2026-05-02 01:31:38 ALERT Mass file rename detected host=FILESERVER count=3 extension=.locked
+2026-05-02 01:31:50 ALERT Ransom note created host=FILESERVER file=READ_ME_TO_DECRYPT.txt
