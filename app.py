@@ -7,9 +7,13 @@ You don't have to WRITE this app — but a tool you can't explain is a tool you
 can't trust, so read it. The pieces worth understanding are marked  #->
 """
 
+import os
+from datetime import datetime
+
 import streamlit as st
 from groq import Groq
-from datetime import datetime
+
+REPORTS_DIR = "reports"
 
 # #-> The model, and the system prompt that defines the analyst's job. The
 #     five numbered sections are exactly what the Copilot must return.
@@ -54,7 +58,7 @@ def ask_groq(messages):
 st.set_page_config(page_title="The Investigator — SOC Copilot", page_icon="🕵️")
 st.title("🕵️ The Investigator — SOC Copilot")
 
-tab1, tab2 = st.tabs(["Correlate & Triage", "Ask the Investigator"])
+tab1, tab2, tab3 = st.tabs(["Correlate & Triage", "Ask the Investigator", "Case Files"])
 
 # ---------------------------------------------------------------------------
 # TAB 1 — Correlate & Triage
@@ -124,10 +128,11 @@ with tab2:
             )
         st.session_state.chat.append({"role": "assistant", "content": answer})
         st.chat_message("assistant").markdown(answer)
-#----------------
-#tab 3 Case files
-#----------------
-with tab3:  # Case Files
+# ---------------------------------------------------------------------------
+# TAB 3 — Case Files
+# ---------------------------------------------------------------------------
+with tab3:
+    st.subheader("Case Files")
     if os.path.isdir(REPORTS_DIR):
         md_files = sorted(
             (f for f in os.listdir(REPORTS_DIR) if f.endswith(".md")),
@@ -139,5 +144,5 @@ with tab3:  # Case Files
         st.info("No case files yet. Reports saved to reports/ will appear here.")
     else:
         choice = st.selectbox("Pick a case file", md_files)
-        with open(os.path.join(REPORTS_DIR, choice)) as f:
+        with open(os.path.join(REPORTS_DIR, choice), encoding="utf-8") as f:
             st.markdown(f.read())
