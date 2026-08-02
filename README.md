@@ -1,35 +1,127 @@
-# the-investigator
+# The Investigator — AI Security & Network Copilot
 
-An AI-powered security & network analyst(being built over time)
+An AI-powered security analyst that helps investigate cyber incidents by correlating logs, detecting suspicious activity, mapping findings to the MITRE ATT&CK framework, and generating actionable incident reports. The Investigator combines AI-assisted analysis with transparent evidence review to support both security professionals and students learning incident response.
 
-## Skills so far
+🔗 Live App: https://the-investigator-yf4chngyyepi7ww7krozvp.streamlit.app/
 
-- Week 1: Thinks like a security analyst (prompt library)
-- Week 2: Can triage suspicious emails — check headers (SPF/DKIM/DMARC, Reply-To), flag urgency/secrecy/authority, recommend out-of-band verification
-- Week 3:Can audit server logs for failed-login and brute-force patterns (see audit.py).
-- Week 4: Can hunt network beaconing (hunt.py) and reconstruct an incident timeline from multiple logs to guide response (timeline.py).
-More coming each week.
-- Week 5: Runs an automated triage pipeline (GitHub Actions + a local Llama 3.2 model via Ollama) that reads the IR runbook, maps findings to MITRE ATT&CK, and writes a verified incident report.
-- Week 6: A Streamlit SOC Copilot that correlates four telemetry sources (firewall, Sysmon, Windows, Suricata) via Groq and returns a triaged report with MITRE mapping, severity, and response plan.
-- Week 7: Case Files — browse saved Markdown reports from prior triage runs.
-- Week 8: Agentic mode — give the Investigator a goal; it chooses tools, shows an auditable trail, and returns a supervised verdict (CLI via `agent.py`, same loop in the Streamlit Autonomous Investigation tab).
-// Start the Investigator
+📦 Docker Hub: https://hub.docker.com/repositories/stephenredbird
 
-## Live application
+---
 
-Streamlit App: https://the-investigator-yf4chngyyepi7ww7krozvp.streamlit.app/
+## Screenshot
 
-**What it does**
-- Correlate & Triage — upload logs; get one correlated incident report (MITRE, severity, investigation & response plans)
-- Ask the Investigator — chat with a senior SOC analyst about the case
-- Case Files — browse saved reports from prior runs in `reports/`
-- Autonomous Investigation — agentic mode in the browser (see below)
 
-**Agentic mode (Week 8)**
-You hand it a goal (“investigate the incident in `evidence/`”); it decides the next steps — you supervise the trail instead of driving each click.
 
-- Tools it can call: `list_evidence`, `read_log`, `lookup_mitre`
-- Shows each tool call as it runs so you can audit what it chose
-- Stops when it has enough evidence and writes a verdict: attack chain, hosts/accounts/IPs, MITRE mapping, and severity
-- Same loop as `agent.py` (CLI) and the Autonomous Investigation tab (Streamlit)
-- Only cites logs it actually read — verify the trail before you trust the verdict
+---
+
+## What It Does
+
+### Correlate & Triage
+Upload logs from multiple sources and receive a single correlated incident report that includes:
+
+- MITRE ATT&CK mappings
+- Severity assessment
+- Investigation plan
+- Recommended response actions
+
+### Email Security Analysis
+Analyze suspicious emails by reviewing:
+
+- SPF validation
+- DKIM validation
+- DMARC results
+- Reply-To mismatches
+- Urgency, authority, and social engineering indicators
+
+### Log Analysis & Threat Hunting
+
+The Investigator can:
+
+- Analyze server logs for failed-login and brute-force activity
+- Detect beaconing and suspicious network patterns
+- Reconstruct incident timelines from multiple log sources
+- Identify indicators that may suggest compromise
+
+### Ask the Investigator
+
+Chat with an AI-powered SOC analyst to:
+
+- Review findings
+- Explain incident details
+- Discuss MITRE ATT&CK techniques
+- Recommend response actions
+
+### Case Files
+
+Store and review previous investigations through saved Markdown reports.
+
+### Autonomous Investigation
+
+Provide evidence and an investigation goal, and the agent will:
+
+- Determine which tools to use
+- Examine available logs
+- Document its actions
+- Build an attack narrative
+- Produce a final evidence-based verdict
+
+Every tool invocation is visible to the analyst for review and validation.
+
+---
+
+## Tech Stack
+
+- **Python**
+- **Streamlit** (Web Application)
+- **Groq / Llama Models** (SOC Copilot)
+- **Ollama** (Local AI Models)
+- **GitHub Actions** (Automated Triage Pipeline)
+- **Docker** (Containerized Deployment)
+- **MITRE ATT&CK Framework** (Technique Mapping)
+
+
+---
+
+## Run Locally
+
+Clone the repository:
+
+```bash
+git clone https://github.com/stephen-redbird/the-investigator.git
+cd the-investigator
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Add your API key:
+
+```toml
+# .streamlit/secrets.toml
+
+GROQ_API_KEY="your_key_here"
+```
+
+Start the application:
+
+```bash
+streamlit run app.py
+```
+
+---
+
+## Disclaimer
+
+The Investigator is designed to assist analysts, not replace them. AI-generated findings should always be validated against the underlying evidence before operational decisions are made.
+
+---
+
+## Author
+
+Stephen Redbird
+
+- GitHub: https://github.com/stephen-redbird
+- Docker Hub: https://hub.docker.com/repositories/stephenredbird
