@@ -124,3 +124,20 @@ with tab2:
             )
         st.session_state.chat.append({"role": "assistant", "content": answer})
         st.chat_message("assistant").markdown(answer)
+#----------------
+#tab 3 Case files
+#----------------
+with tab3:  # Case Files
+    if os.path.isdir(REPORTS_DIR):
+        md_files = sorted(
+            (f for f in os.listdir(REPORTS_DIR) if f.endswith(".md")),
+            reverse=True,
+        )
+    else:
+        md_files = []
+    if not md_files:
+        st.info("No case files yet. Reports saved to reports/ will appear here.")
+    else:
+        choice = st.selectbox("Pick a case file", md_files)
+        with open(os.path.join(REPORTS_DIR, choice)) as f:
+            st.markdown(f.read())
